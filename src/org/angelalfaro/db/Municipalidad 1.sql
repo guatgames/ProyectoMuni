@@ -528,6 +528,52 @@ begin
   select row_count() as filas_afectadas;
 end $$
 delimiter ;
+-- ========== Vehiculos ==========
+delimiter $$
+create procedure sp_vehiculos_create(in p_placa varchar(10), 
+in p_marca varchar(30), in p_modelo varchar(30), in p_anio int, in p_color varchar(24),
+in p_id_ciudadano int)
+begin
+insert into Veliculos(placa, marca, modelo, anio, color, id_ciudadano)
+value (p_placa, p_marca, p_modelo, p_anio, p_color, p_id_ciudadano);
+select last_insert_id() as id_vehiculo;
+end$$ 
+delimiter ;
+
+delimiter $$
+create procedure sp_vehiculos_read_all()
+begin
+  select * from Vehiculos order by id_vehiculo;
+end$$
+delimiter ;
+
+delimiter $$
+create procedure sp_vehiculos_read_by_id(in p_id int)
+begin
+  select * from Vehiculos where id_vehiculo = p_id;
+end$$
+delimiter ;
+
+delimiter $$
+create procedure sp_vehiculos_update(in p_id int ,in p_color varchar(24), in p_id_ciudadano int)
+begin
+  update Vehiculos
+  set 
+  color = p_color,
+  id_ciudadano = p_id_ciudadano
+  where id_vehiculo = p_id;
+  select row_count() as filas_afectadas;
+end$$
+delimiter ;
+
+delimiter $$
+create procedure sp_vehiculos_delete(in p_id int)
+begin
+  delete from vehiculos where id_vehiculo = p_id;
+  select row_count() as filas_afectadas;
+end$$
+delimiter ;
+
 
 -- ========== AGENTES ==========
 delimiter $$
