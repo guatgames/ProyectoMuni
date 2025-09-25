@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.AngelAlfaro.components.Card;
 import org.AngelAlfaro.system.Loader;
+import org.AngelAlfaro.system.Main;
 
 
 public class HomeController implements Initializable {
@@ -22,7 +23,7 @@ public class HomeController implements Initializable {
     private Button btnZonas, btnCiudadanos, btnConductores, btnLicencias, btnVehiculos, btnAgentes;
     
     @FXML
-    private Button btnInfracciones, btnMultas, btnPagos;
+    private Button btnInfracciones, btnMultas, btnPagos, btnUsuario;
     
     @FXML
     private void handleButtonAction(ActionEvent e){
@@ -99,6 +100,14 @@ public class HomeController implements Initializable {
                 Loader.getSingleton().alerta(Alert.AlertType.ERROR,"Cargar Escena","Error al cargar la escena");
             }
             
+        } else if(e.getSource() == btnUsuario){
+            
+            try {
+                Loader.getSingleton().newScene("../views/UserView.fxml","User");
+            } catch (Exception ev){
+                Loader.getSingleton().alerta(Alert.AlertType.ERROR,"Cargar Escena","Error al cargar la escena");
+            }
+            
         }
         
     }
@@ -106,6 +115,8 @@ public class HomeController implements Initializable {
     @FXML
     private void logout(){
         try {
+            Main.curren_user = 0;
+            Main.current_name = "";
             Loader.getSingleton().newScene("../views/LoginMuni.fxml","Login");
         } catch (Exception e){
             Loader.getSingleton().alerta(Alert.AlertType.ERROR,"Cargar Escena","Error al cargar la escena");

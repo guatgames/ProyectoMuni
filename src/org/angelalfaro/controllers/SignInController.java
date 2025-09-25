@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import org.AngelAlfaro.conexion.Conexion;
 
 import org.AngelAlfaro.system.Loader;
+import org.AngelAlfaro.system.Main;
 
 /**
  *
@@ -56,6 +57,15 @@ public class SignInController implements Initializable {
                         c.setString(2,cont);
 
                         try (ResultSet rs = c.executeQuery()){
+                            
+                            while (rs.next()){
+                                
+                                Main.curren_user = rs.getInt("id");
+                                Main.current_name = nom;
+                            
+                                //System.out.println(Main.curren_user);
+                                
+                            }
 
                             Loader.getSingleton().alerta(Alert.AlertType.CONFIRMATION,"Operacion Realizada","Se agrego el usuario correctamente");
 

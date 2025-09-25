@@ -40,7 +40,7 @@ create table conductores(
 );
 
 create table licencias(
-	id_licencia int primary key not null,
+	id_licencia int primary key auto_increment,
     id_conductores int not null,
     categoria enum('A', 'B', 'C', 'M', 'T') not null,
     fechaEmision date not null,
@@ -98,7 +98,7 @@ create table pagos(
 	id_pago int primary key auto_increment,
     id_multa int not null,
     fechaPago date not null,
-    montoPagado decimal(10,2) not null,
+    montoPagado decimal(10,2) not null,	
     metodoPago decimal(10,2) not null,
     referencia varchar(40) not null,
     constraint fk_pagos_multas foreign key (id_multa) references multas(id_multa)
@@ -108,7 +108,7 @@ create table pagos(
 -- DATOS
 -- ---------------------------------------
 -- 0) Login
-insert into login (nombre, contrasena) values ("max","123");
+insert into login (nombre, contrasena) values ("Angel","123");
 
 -- 1) zonas
 insert into zonas (zona) values
@@ -150,17 +150,17 @@ insert into conductores (id_ciudadano,tipoSangre) values
 (10,'O+');
 
 -- 4) licencias
-insert into licencias (id_licencia,id_conductores,categoria,fechaEmision,fechaVencimiento,estado) values
-(101,1,'B','2023-01-15','2027-01-14','vigente'),
-(102,2,'C','2022-05-10','2026-05-09','vigente'),
-(103,3,'M','2021-08-20','2025-08-19','vigente'),
-(104,4,'B','2020-02-01','2024-01-31','vencida'),
-(105,5,'A','2023-03-05','2027-03-04','vigente'),
-(106,6,'B','2022-11-12','2026-11-11','vigente'),
-(107,7,'C','2021-06-25','2025-06-24','vigente'),
-(108,8,'M','2020-09-30','2024-09-29','vencida'),
-(109,9,'T','2023-07-07','2027-07-06','vigente'),
-(110,10,'B','2024-01-10','2028-01-09','vigente');
+insert into licencias (id_conductores,categoria,fechaEmision,fechaVencimiento,estado) values
+(1,'B','2023-01-15','2027-01-14','vigente'),
+(2,'C','2022-05-10','2026-05-09','vigente'),
+(3,'M','2021-08-20','2025-08-19','vigente'),
+(4,'B','2020-02-01','2024-01-31','vencida'),
+(5,'A','2023-03-05','2027-03-04','vigente'),
+(6,'B','2022-11-12','2026-11-11','vigente'),
+(7,'C','2021-06-25','2025-06-24','vigente'),
+(8,'M','2020-09-30','2024-09-29','vencida'),
+(9,'T','2023-07-07','2027-07-06','vigente'),
+(10,'B','2024-01-10','2028-01-09','vigente');
 
 -- 5) vehiculos
 insert into vehiculos (placa,marca,modelo,anio,color,id_ciudadano) values
@@ -242,6 +242,15 @@ delimiter $$
 	  limit 1;
 	end $$
 delimiter ;
+
+delimiter $$
+	create procedure sp_login_create(in nom varchar(30), in cont varchar(30))
+    
+    begin
+		insert into login(nombre,contrasena)
+			value (nom, cont);
+	end$$
+delimite ;
 
 -- ========== ZONAS ==========
 delimiter $$
@@ -382,49 +391,95 @@ delimiter ;
 -- ========== LICENCIAS ==========
 delimiter $$
 create procedure sp_licencias_create(
-  in p_id_licencia int, in p_id_conductores int,
-  in p_categoria enum('A','B','C','M','T'),
-  in p_fechaEmision date, in p_fechaVencimiento date,
-  in p_estado enum('vigente','vencida','suspendida')
+  in p_id_conductores int,
+  in p_categoria char(1),
+  in p_fechaEmision date,
+  in p_fechaVencimiento date,
+  in p_estado varchar(10)
 )
 begin
-  insert into licencias(id_licencia,id_conductores,categoria,fechaEmision,fechaVencimiento,estado)
-  values(p_id_licencia,p_id_conductores,p_categoria,p_fechaEmision,p_fechaVencimiento,p_estado);
-  select p_id_licencia as id_licencia;
-end$$
+  if p_categoria not in ('A','B','C','M','T') then
+    signal sqlstate '45000' set message_text = 'categoria invalida';
+  end if;
+
+  if p_estado not in ('vigente','vencida','suspendida') then
+    signal sqlstate '45000' set message_text = 'estado invalido';
+  end if;
+
+  if p_fechaEmision is null or p_fechaVencimiento is null or p_fechaEmision >= p_fechaVencimiento then
+    signal sqlstate '45000' set message_text = 'rango de fechas invalido';
+  end if;
+
+  if (select count(*) from conductores where id_conductores = p_id_conductores) = 0 then
+    signal sqlstate '45000' set message_text = 'conductor no existe';
+  end if;
+
+  insert into licencias(id_conductores,categoria,fechaEmision,fechaVencimiento,estado)
+  values(p_id_conductores,p_categoria,p_fechaEmision,p_fechaVencimiento,p_estado);
+
+  select last_insert_id() as id_licencia;
+end $$
 delimiter ;
 
 delimiter $$
 create procedure sp_licencias_read_all()
 begin
   select * from licencias order by id_licencia;
-end$$
+end $$
 delimiter ;
 
 delimiter $$
 create procedure sp_licencias_read_by_id(in p_id int)
 begin
   select * from licencias where id_licencia = p_id;
-end$$
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_licencias_read_by_conductor(in p_id_conductores int)
+begin
+  select * from licencias
+  where id_conductores = p_id_conductores
+  order by fechaVencimiento desc, id_licencia desc;
+end $$
 delimiter ;
 
 delimiter $$
 create procedure sp_licencias_update(
-  in p_id int, in p_id_conductores int,
-  in p_categoria enum('A','B','C','M','T'),
-  in p_fechaEmision date, in p_fechaVencimiento date,
-  in p_estado enum('vigente','vencida','suspendida')
+  in p_id int,
+  in p_id_conductores int,
+  in p_categoria char(1),
+  in p_fechaEmision date,
+  in p_fechaVencimiento date,
+  in p_estado varchar(10)
 )
 begin
+  if p_categoria not in ('A','B','C','M','T') then
+    signal sqlstate '45000' set message_text = 'categoria invalida';
+  end if;
+
+  if p_estado not in ('vigente','vencida','suspendida') then
+    signal sqlstate '45000' set message_text = 'estado invalido';
+  end if;
+
+  if p_fechaEmision is null or p_fechaVencimiento is null or p_fechaEmision >= p_fechaVencimiento then
+    signal sqlstate '45000' set message_text = 'rango de fechas invalido';
+  end if;
+
+  if (select count(*) from conductores where id_conductores = p_id_conductores) = 0 then
+    signal sqlstate '45000' set message_text = 'conductor no existe';
+  end if;
+
   update licencias
-  set id_conductores = p_id_conductores,
-      categoria = p_categoria,
-      fechaEmision = p_fechaEmision,
+  set id_conductores   = p_id_conductores,
+      categoria        = p_categoria,
+      fechaEmision     = p_fechaEmision,
       fechaVencimiento = p_fechaVencimiento,
-      estado = p_estado
+      estado           = p_estado
   where id_licencia = p_id;
+
   select row_count() as filas_afectadas;
-end$$
+end $$
 delimiter ;
 
 delimiter $$
@@ -432,48 +487,80 @@ create procedure sp_licencias_delete(in p_id int)
 begin
   delete from licencias where id_licencia = p_id;
   select row_count() as filas_afectadas;
-end$$
+end $$
 delimiter ;
 
--- ========== VEHICULOS ==========
 delimiter $$
-create procedure sp_vehiculos_create(
-  in p_placa varchar(10), in p_marca varchar(30), in p_modelo varchar(30),
-  in p_anio int, in p_color varchar(20), in p_id_ciudadano int
+create procedure sp_licencias_renovar(
+  in p_id int,
+  in p_nuevaEmision date,
+  in p_nuevaVenc date
 )
 begin
-  insert into vehiculos(placa,marca,modelo,anio,color,id_ciudadano)
-  values(p_placa,p_marca,p_modelo,p_anio,p_color,p_id_ciudadano);
-  select last_insert_id() as id_vehiculo;
-end$$
+  if p_nuevaEmision is null or p_nuevaVenc is null or p_nuevaEmision >= p_nuevaVenc then
+    signal sqlstate '45000' set message_text = 'rango de fechas invalido';
+  end if;
+
+  update licencias
+  set fechaEmision = p_nuevaEmision,
+      fechaVencimiento = p_nuevaVenc,
+      estado = 'vigente'
+  where id_licencia = p_id;
+
+  select row_count() as filas_afectadas;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_licencias_set_estado(
+  in p_id int,
+  in p_estado varchar(10)
+)
+begin
+  if p_estado not in ('vigente','vencida','suspendida') then
+    signal sqlstate '45000' set message_text = 'estado invalido';
+  end if;
+
+  update licencias
+  set estado = p_estado
+  where id_licencia = p_id;
+
+  select row_count() as filas_afectadas;
+end $$
+delimiter ;
+-- ========== Vehiculos ==========
+delimiter $$
+create procedure sp_vehiculos_create(in p_placa varchar(10), 
+in p_marca varchar(30), in p_modelo varchar(30), in p_anio int, in p_color varchar(24),
+in p_id_ciudadano int)
+begin
+insert into Veliculos(placa, marca, modelo, anio, color, id_ciudadano)
+value (p_placa, p_marca, p_modelo, p_anio, p_color, p_id_ciudadano);
+select last_insert_id() as id_vehiculo;
+end$$ 
 delimiter ;
 
 delimiter $$
 create procedure sp_vehiculos_read_all()
 begin
-  select * from vehiculos order by id_vehiculo;
+  select * from Vehiculos order by id_vehiculo;
 end$$
 delimiter ;
 
 delimiter $$
 create procedure sp_vehiculos_read_by_id(in p_id int)
 begin
-  select * from vehiculos where id_vehiculo = p_id;
+  select * from Vehiculos where id_vehiculo = p_id;
 end$$
 delimiter ;
 
 delimiter $$
-create procedure sp_vehiculos_update(
-  in p_id int, in p_color varchar(20), in p_id_ciudadano int,
-  in p_marca varchar(30), in p_modelo varchar(30), in p_anio int
-)
+create procedure sp_vehiculos_update(in p_id int ,in p_color varchar(24), in p_id_ciudadano int)
 begin
-  update vehiculos
-  set color = p_color,
-      id_ciudadano = p_id_ciudadano,
-      marca = p_marca,
-      modelo = p_modelo,
-      anio = p_anio
+  update Vehiculos
+  set 
+  color = p_color,
+  id_ciudadano = p_id_ciudadano
   where id_vehiculo = p_id;
   select row_count() as filas_afectadas;
 end$$
@@ -486,6 +573,7 @@ begin
   select row_count() as filas_afectadas;
 end$$
 delimiter ;
+
 
 -- ========== AGENTES ==========
 delimiter $$
@@ -837,4 +925,4 @@ group by m.id_multa, m.monto;
 -- select * from v_saldos_por_conductor;
 -- select * from v_multas_por_zona;
 -- select * from v_licencias_por_vencer_60d;
--- select * from v_resumen_pagos_por_multa;
+-- select * from v_resumen_pagos_por_multa;	

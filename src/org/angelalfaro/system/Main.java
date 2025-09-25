@@ -15,6 +15,8 @@ import org.AngelAlfaro.conexion.Conexion;
 public class Main extends Application {
     
     private static Stage primaryStage;
+    public static int curren_user;
+    public static String current_name; 
 
     @Override
     public void start(Stage stage) throws IOException, Exception{

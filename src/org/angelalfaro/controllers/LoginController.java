@@ -13,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.AngelAlfaro.conexion.Conexion;
 import org.AngelAlfaro.system.Loader;
+import org.AngelAlfaro.system.Main;
 
 
 public class LoginController implements Initializable {
@@ -22,6 +23,7 @@ public class LoginController implements Initializable {
     
     @FXML
     private PasswordField psContrasena;
+    
     
     @FXML
     private void login(){
@@ -43,6 +45,10 @@ public class LoginController implements Initializable {
                 
                 try (ResultSet rs = c.executeQuery()){
                     if(rs.next()){
+                        
+                        Main.curren_user = rs.getInt("id");
+                        Main.current_name = rs.getString("nombre");
+                        //System.out.println(Main.curren_user);
                         
                         Loader.getSingleton().alerta(Alert.AlertType.CONFIRMATION,"Ingreso","Ingreso Exitoso");
                         cargarMenuPrincipal();
