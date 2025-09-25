@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: #ddfbe6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.AngelAlfaro.controllers.CiudadanosController">
+   <children>
+      <ScrollPane fx:id="cardsContainer" layoutX="224.0" layoutY="310.0" prefHeight="268.0" prefWidth="494.0" />
+      <Pane prefHeight="600.0" prefWidth="208.0" style="-fx-background-color: #9fe5d7;">
+         <children>
+            <Label alignment="CENTER" layoutY="70.0" prefHeight="77.0" prefWidth="208.0" text="Ciudadanos" textFill="#009987">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnAgregar" alignment="CENTER" layoutX="34.0" layoutY="146.0" mnemonicParsing="false" onAction="#onAgregar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Agregar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnEditar" alignment="CENTER" layoutX="33.0" layoutY="214.0" mnemonicParsing="false" onAction="#onEditar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Editar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnActualizar" alignment="CENTER" layoutX="33.0" layoutY="354.0" mnemonicParsing="false" onAction="#onActualizar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Actualizar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnLimpiar" alignment="CENTER" layoutX="33.0" layoutY="494.0" mnemonicParsing="false" onAction="#onLimpiar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Limpiar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Pane fx:id="btnHome" layoutX="45.0" layoutY="22.0" onMouseClicked="#home" prefHeight="59.0" prefWidth="111.0">
+               <children>
+                  <Line endX="66.0" layoutX="30.0" layoutY="29.0" startX="-7.0" />
+                  <Line endX="100.0" layoutX="-52.0" layoutY="15.0" startX="75.5" startY="12.5" />
+                  <Line endX="100.0" layoutX="-52.0" layoutY="32.0" rotate="56.3" startX="75.5" startY="12.5" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Button fx:id="btnEliminar" alignment="CENTER" layoutX="34.0" layoutY="282.0" mnemonicParsing="false" onAction="#onEliminar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Eliminar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnBuscar" alignment="CENTER" layoutX="33.0" layoutY="423.0" mnemonicParsing="false" onAction="#onBuscar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Buscar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <TextField fx:id="txtId" layoutX="333.0" layoutY="31.0" prefHeight="59.0" prefWidth="142.0" promptText="id" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtIdZona" layoutX="333.0" layoutY="102.0" prefHeight="59.0" prefWidth="142.0" promptText="idZona" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtNombre" layoutX="330.0" layoutY="173.0" prefHeight="59.0" prefWidth="142.0" promptText="Nombre" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="213.0" layoutY="173.0" prefHeight="59.0" prefWidth="117.0" text="Nombre" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="216.0" layoutY="102.0" prefHeight="59.0" prefWidth="117.0" text="Id_Zona" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="216.0" layoutY="31.0" prefHeight="59.0" prefWidth="117.0" text="Id" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtApellido" layoutX="333.0" layoutY="241.0" prefHeight="59.0" prefWidth="142.0" promptText="Apellido" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="216.0" layoutY="241.0" prefHeight="59.0" prefWidth="117.0" text="Apellido" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtDPI" layoutX="594.0" layoutY="31.0" prefHeight="59.0" prefWidth="142.0" promptText="dpi" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="477.0" layoutY="31.0" prefHeight="59.0" prefWidth="117.0" text="DPI" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTelefono" layoutX="594.0" layoutY="102.0" prefHeight="59.0" prefWidth="142.0" promptText="Telefono" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="477.0" layoutY="102.0" prefHeight="59.0" prefWidth="117.0" text="Telefono" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEmail" layoutX="594.0" layoutY="172.0" prefHeight="59.0" prefWidth="142.0" promptText="Email" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="477.0" layoutY="172.0" prefHeight="59.0" prefWidth="117.0" text="Email" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtDireccion" layoutX="594.0" layoutY="241.0" prefHeight="59.0" prefWidth="142.0" promptText="Direccion" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="477.0" layoutY="241.0" prefHeight="59.0" prefWidth="117.0" text="Direccion" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: #ddfbe6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.angelalfaro.controllers.VehiculosController">
+   <children>
+      <ScrollPane fx:id="cardsContainer" layoutX="224.0" layoutY="325.0" prefHeight="253.0" prefWidth="494.0" />
+      <Pane prefHeight="600.0" prefWidth="208.0" style="-fx-background-color: #9fe5d7;">
+         <children>
+            <Label alignment="CENTER" layoutY="70.0" prefHeight="77.0" prefWidth="208.0" text="Vehiculos" textFill="#009987">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Pane fx:id="btnHome" layoutX="45.0" layoutY="22.0" onMouseClicked="#home" prefHeight="59.0" prefWidth="111.0">
+               <children>
+                  <Line endX="66.0" layoutX="30.0" layoutY="29.0" startX="-7.0" />
+                  <Line endX="100.0" layoutX="-52.0" layoutY="15.0" startX="75.5" startY="12.5" />
+                  <Line endX="100.0" layoutX="-52.0" layoutY="32.0" rotate="56.3" startX="75.5" startY="12.5" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Button fx:id="btnAgregar" alignment="CENTER" layoutX="34.0" layoutY="147.0" mnemonicParsing="false" onAction="#onAgregar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Agregar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnEditar" alignment="CENTER" layoutX="34.0" layoutY="213.0" mnemonicParsing="false" onAction="#onEditar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Editar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnActualizar" alignment="CENTER" layoutX="34.0" layoutY="353.0" mnemonicParsing="false" onAction="#onActualizar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Actualizar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnLimpiar" alignment="CENTER" layoutX="33.0" layoutY="500.0" mnemonicParsing="false" onAction="#onLimpiar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Limpiar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnEliminar" alignment="CENTER" layoutX="34.0" layoutY="285.0" mnemonicParsing="false" onAction="#onEliminar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Eliminar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnBuscar" alignment="CENTER" layoutX="34.0" layoutY="428.0" mnemonicParsing="false" onAction="#onBuscar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Buscar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <TextField fx:id="txtId" layoutX="333.0" layoutY="31.0" prefHeight="59.0" prefWidth="142.0" promptText="id" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtPlaca" layoutX="333.0" layoutY="102.0" prefHeight="59.0" prefWidth="142.0" promptText="Placa" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="216.0" layoutY="102.0" prefHeight="59.0" prefWidth="117.0" text="Placa" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="216.0" layoutY="31.0" prefHeight="59.0" prefWidth="117.0" text="Id" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtMarca" layoutX="333.0" layoutY="173.0" prefHeight="59.0" prefWidth="142.0" promptText="Marca" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="216.0" layoutY="173.0" prefHeight="59.0" prefWidth="117.0" text="Marca" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtModelo" layoutX="588.0" layoutY="31.0" prefHeight="59.0" prefWidth="142.0" promptText="Modelo" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="471.0" layoutY="31.0" prefHeight="59.0" prefWidth="117.0" text="Modelo" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtAnio" layoutX="588.0" layoutY="102.0" prefHeight="59.0" prefWidth="142.0" promptText="Año" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="471.0" layoutY="102.0" prefHeight="59.0" prefWidth="117.0" text="Año" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="471.0" layoutY="173.0" prefHeight="59.0" prefWidth="117.0" text="Color" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ColorPicker fx:id="colorPicker" layoutX="588.0" layoutY="173.0" prefHeight="59.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 15;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ColorPicker>
+      <TextField fx:id="txtIdCiudadano" layoutX="432.0" layoutY="250.0" prefHeight="59.0" prefWidth="244.0" promptText="idCiudadano" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="228.0" layoutY="250.0" prefHeight="59.0" prefWidth="216.0" text="Id Ciudadano" textFill="#009987">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

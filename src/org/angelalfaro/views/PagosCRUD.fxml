@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: #ddfbe6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.angelalfaro.controllers.PagosController">
+   <children>
+      <ScrollPane fx:id="cardsContainer" layoutX="224.0" layoutY="271.0" prefHeight="309.0" prefWidth="513.0" />
+      <Pane prefHeight="600.0" prefWidth="208.0" style="-fx-background-color: #9fe5d7;">
+         <children>
+            <Label alignment="CENTER" layoutY="70.0" prefHeight="77.0" prefWidth="208.0" text="Pagos" textFill="#009987">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Pane fx:id="btnHome" layoutX="45.0" layoutY="22.0" onMouseClicked="#home" prefHeight="59.0" prefWidth="111.0">
+               <children>
+                  <Line endX="66.0" layoutX="30.0" layoutY="29.0" startX="-7.0" />
+                  <Line endX="100.0" layoutX="-52.0" layoutY="15.0" startX="75.5" startY="12.5" />
+                  <Line endX="100.0" layoutX="-52.0" layoutY="32.0" rotate="56.3" startX="75.5" startY="12.5" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Button fx:id="btnAgregar" alignment="CENTER" layoutX="34.0" layoutY="147.0" mnemonicParsing="false" onAction="#onAgregar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Agregar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnEditar" alignment="CENTER" layoutX="34.0" layoutY="364.0" mnemonicParsing="false" onAction="#onBuscarM" prefHeight="59.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Buscar Multa" textFill="#009987" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnActualizar" alignment="CENTER" layoutX="34.0" layoutY="436.0" mnemonicParsing="false" onAction="#onActualizar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Actualizar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnLimpiar" alignment="CENTER" layoutX="33.0" layoutY="500.0" mnemonicParsing="false" onAction="#onLimpiar" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Limpiar" textFill="#009987">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnEliminar" alignment="CENTER" layoutX="34.0" layoutY="284.0" mnemonicParsing="false" onAction="#onBuscarR" prefHeight="69.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Buscar rango Fechas" textFill="#009987" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnBuscar" alignment="CENTER" layoutX="34.0" layoutY="211.0" mnemonicParsing="false" onAction="#onBuscarP" prefHeight="59.0" prefWidth="142.0" style="-fx-background-color: #70d2c6; -fx-background-radius: 156;" text="Buscar Pago" textFill="#009987" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <TextField fx:id="txtId" layoutX="331.0" layoutY="18.0" prefHeight="51.0" prefWidth="143.0" promptText="id" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtIdMulta" layoutX="331.0" layoutY="77.0" prefHeight="51.0" prefWidth="143.0" promptText="id Multa" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="213.0" layoutY="73.0" prefHeight="59.0" prefWidth="117.0" text="Id Multa" textFill="#009987">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="213.0" layoutY="14.0" prefHeight="59.0" prefWidth="117.0" text="Id" textFill="#009987">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtMonto" layoutX="331.0" layoutY="134.0" prefHeight="51.0" prefWidth="143.0" promptText="Monto" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label fx:id="txtM" alignment="CENTER" layoutX="213.0" layoutY="130.0" prefHeight="59.0" prefWidth="117.0" text="Monto" textFill="#009987">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtMetodo" layoutX="573.0" layoutY="76.0" prefHeight="52.0" prefWidth="166.0" promptText="metodo Pago (decimal)" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="465.0" layoutY="72.0" prefHeight="59.0" prefWidth="117.0" text="Metodo" textFill="#009987">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="465.0" layoutY="13.0" prefHeight="59.0" prefWidth="117.0" text="Fecha" textFill="#009987">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtReferencia" layoutX="573.0" layoutY="134.0" prefHeight="52.0" prefWidth="166.0" promptText="referencia" style="-fx-background-radius: 20;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label alignment="CENTER" layoutX="465.0" layoutY="130.0" prefHeight="59.0" prefWidth="117.0" text="Referencia" textFill="#009987">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="datePickerF" layoutX="572.0" layoutY="17.0" prefHeight="53.0" prefWidth="166.0" />
+      <Label alignment="CENTER" layoutX="213.0" layoutY="197.0" prefHeight="59.0" prefWidth="117.0" text="Rango 1" textFill="#009987">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="r1" layoutX="330.0" layoutY="200.0" prefHeight="53.0" prefWidth="144.0" />
+      <Label alignment="CENTER" layoutX="465.0" layoutY="197.0" prefHeight="59.0" prefWidth="117.0" text="Rango 2" textFill="#009987">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="r2" layoutX="573.0" layoutY="200.0" prefHeight="53.0" prefWidth="166.0" />
+   </children>
+</AnchorPane>
