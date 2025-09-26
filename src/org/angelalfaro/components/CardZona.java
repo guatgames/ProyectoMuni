@@ -1,5 +1,5 @@
 
-package org.angelalfaro.components;
+package org.AngelAlfaro.components;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;

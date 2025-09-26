@@ -97,6 +97,7 @@ public class PagosController implements Initializable{
                 break;
             case BUSCARM:
                 txtIdMulta.setDisable(false);
+                txtIdMulta.requestFocus();
 
                 btnAgregar.setDisable(true);
                 btnEliminar.setDisable(true);
@@ -117,6 +118,8 @@ public class PagosController implements Initializable{
                 
                 break;
             case BUSCARP:
+                txtId.setDisable(false);
+                txtId.requestFocus();
 
                 btnAgregar.setDisable(true);
                 btnEditar.setDisable(true);

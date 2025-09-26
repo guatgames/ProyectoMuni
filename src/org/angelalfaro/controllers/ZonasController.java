@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import org.angelalfaro.components.CardZona;
+import org.AngelAlfaro.components.CardZona;
 import org.AngelAlfaro.conexion.Conexion;
 import org.AngelAlfaro.system.Loader;
 
@@ -212,7 +212,7 @@ public class ZonasController implements Initializable {
                     }
 
                 } catch (Exception e){
-                    //Loader.getSingleton().alerta(Alert.AlertType.ERROR,"Error","no se puede hacer la peticion");
+                    Loader.getSingleton().alerta(Alert.AlertType.ERROR,"Error","no se puede hacer la peticion");
                 }
             } catch(Exception e){
                 e.getStackTrace();

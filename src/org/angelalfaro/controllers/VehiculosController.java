@@ -149,7 +149,7 @@ public class VehiculosController implements Initializable {
                 try (CallableStatement c = cn.prepareCall("{call sp_vehiculos_create(?,?,?,?,?,?)}")){
 
                     try {
-                        
+                        System.out.println(color);
                         c.setString(1, placa);
                         c.setString(2, marca);
                         c.setString(3, modelo);
@@ -499,7 +499,7 @@ public class VehiculosController implements Initializable {
         txtModelo.setText(modelo);
         txtAnio.setText(anio);
         txtIdCiudadano.setText(idCiudadano);
-        colorPicker.setValue(Color.valueOf(color));
+        colorPicker.setValue(Color.valueOf(color.replace("0x", "#")));
          
          
      }
@@ -507,7 +507,7 @@ public class VehiculosController implements Initializable {
     private CardVehiculo createCardVehiculo(String id, String placa, String marca, String modelo, String anio, String color, String idCiudadano){
         
         CardVehiculo card = new CardVehiculo("No. " + id, "Placa: " + placa, "Marca: " + marca,
-                                    "Modelo: " + modelo, "Año: " + anio, color, "Id Ciudadano: " + idCiudadano);
+                                    "Modelo: " + modelo, "Año: " + anio, color.replace("0x", "#"), "Id Ciudadano: " + idCiudadano);
         
         card.setOnMouseClicked(e -> {
             selectCard(id,placa,marca,modelo,anio,color,idCiudadano);

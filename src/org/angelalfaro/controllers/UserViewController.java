@@ -10,9 +10,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import org.AngelAlfaro.conexion.Conexion;
 import org.AngelAlfaro.system.Loader;
 import org.AngelAlfaro.system.Main;
@@ -21,7 +21,7 @@ import org.AngelAlfaro.system.Main;
 public class UserViewController implements Initializable {
     
     @FXML
-    private Label lblId;
+    private Text lblUser;
     
     @FXML
     private TextField txtNom;
@@ -37,6 +37,8 @@ public class UserViewController implements Initializable {
     private Mode modeActual = Mode.NULL;
     
     private void setMode(Mode m){
+        
+        modeActual = m;
         
         txtNom.setDisable(true);
         psContrasena.setDisable(true);
@@ -233,7 +235,7 @@ public class UserViewController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
         
-        lblId.setText("User: " + Main.current_name);
+        lblUser.setText("User: " + Main.current_name);
         
         setMode(modeActual);
        

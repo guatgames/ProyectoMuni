@@ -20,7 +20,7 @@
             <Image url="@../img/muni.png" />
          </image>
       </ImageView>
-      <Text fx:id="lblId" fill="#187d3c" layoutX="238.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="User:" wrappingWidth="162.13671875">
+      <Text fx:id="lblUser" fill="#187d3c" layoutX="255.0" layoutY="162.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: left;" text="User:" wrappingWidth="243.156494140625">
          <font>
             <Font size="36.0" />
          </font>

@@ -164,16 +164,16 @@ insert into licencias (id_conductores,categoria,fechaEmision,fechaVencimiento,es
 
 -- 5) vehiculos
 insert into vehiculos (placa,marca,modelo,anio,color,id_ciudadano) values
-('P123FBN','Toyota','Corolla',2018,'Blanco',1),
-('P456GHT','Honda','Civic',2020,'Negro',2),
-('P789JKL','Nissan','Versa',2019,'Gris',3),
-('P321MNO','Kia','Rio',2017,'Azul',4),
-('P654PQR','Hyundai','Accent',2021,'Rojo',5),
-('P987STU','Mazda','3',2016,'Plata',6),
-('P741VWX','Chevrolet','Sail',2015,'Blanco',7),
-('P852YZA','Ford','Focus',2018,'Negro',8),
-('P963BCD','Volkswagen','Jetta',2022,'Azul',9),
-('C111EFG','Isuzu','NQR',2019,'Blanco',10);
+('P123FBN','Toyota','Corolla',2018,'white',1),
+('P456GHT','Honda','Civic',2020,'black',2),
+('P789JKL','Nissan','Versa',2019,'grey',3),
+('P321MNO','Kia','Rio',2017,'blue',4),
+('P654PQR','Hyundai','Accent',2021,'red',5),
+('P987STU','Mazda','3',2016,'silver',6),
+('P741VWX','Chevrolet','Sail',2015,'white',7),
+('P852YZA','Ford','Focus',2018,'black',8),
+('P963BCD','Volkswagen','Jetta',2022,'blue',9),
+('C111EFG','Isuzu','NQR',2019,'white',10);
 
 -- 6) agenteTransito
 insert into agenteTransito (codigo,nombre,apellido,telefono,id_zona) values
@@ -248,10 +248,29 @@ delimiter $$
     
     begin
 		insert into login(nombre,contrasena)
-			value (nom, cont);
+			values (nom, cont);
+		select last_insert_id() as id;
 	end$$
-delimite ;
+delimiter ;
 
+delimiter $$
+create procedure sp_login_delete(in p_id int)
+begin
+  delete from login where id = p_id;
+  select row_count() as filas_afectadas;
+end$$
+delimiter ;
+
+delimiter $$
+	create procedure sp_login_update( in p_id int,in p_nombre varchar(30), in p_contrasena varchar(30))
+    
+	begin
+	  update login set
+	  nombre = p_nombre,
+      contrasena = p_contrasena
+		where id = p_id;
+	end $$
+delimiter ;
 -- ========== ZONAS ==========
 delimiter $$
 create procedure sp_zonas_create(in p_zona varchar(7))
@@ -534,8 +553,8 @@ create procedure sp_vehiculos_create(in p_placa varchar(10),
 in p_marca varchar(30), in p_modelo varchar(30), in p_anio int, in p_color varchar(24),
 in p_id_ciudadano int)
 begin
-insert into Veliculos(placa, marca, modelo, anio, color, id_ciudadano)
-value (p_placa, p_marca, p_modelo, p_anio, p_color, p_id_ciudadano);
+insert into vehiculos(placa, marca, modelo, anio, color, id_ciudadano)
+values (p_placa, p_marca, p_modelo, p_anio, p_color, p_id_ciudadano);
 select last_insert_id() as id_vehiculo;
 end$$ 
 delimiter ;

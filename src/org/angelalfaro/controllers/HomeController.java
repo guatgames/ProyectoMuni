@@ -8,11 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import org.AngelAlfaro.components.Card;
 import org.AngelAlfaro.system.Loader;
 import org.AngelAlfaro.system.Main;
 
@@ -100,13 +95,9 @@ public class HomeController implements Initializable {
                 Loader.getSingleton().alerta(Alert.AlertType.ERROR,"Cargar Escena","Error al cargar la escena");
             }
             
-        } else if(e.getSource() == btnUsuario){
+        } else{
             
-            try {
-                Loader.getSingleton().newScene("../views/UserView.fxml","User");
-            } catch (Exception ev){
-                Loader.getSingleton().alerta(Alert.AlertType.ERROR,"Cargar Escena","Error al cargar la escena");
-            }
+            
             
         }
         
@@ -121,6 +112,18 @@ public class HomeController implements Initializable {
         } catch (Exception e){
             Loader.getSingleton().alerta(Alert.AlertType.ERROR,"Cargar Escena","Error al cargar la escena");
         }
+    }
+    
+    @FXML
+    private void user(){
+        
+        try {
+            Loader.getSingleton().newScene("../views/UserView.fxml","User");
+        } catch (Exception ev){
+            Loader.getSingleton().alerta(Alert.AlertType.ERROR,"Cargar Escena","Error al cargar la escena");
+            System.out.println(ev);
+        }
+        
     }
     
     @FXML
